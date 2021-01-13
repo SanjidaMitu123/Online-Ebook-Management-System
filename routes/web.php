@@ -25,13 +25,14 @@ Route::get('/home','backend\HomeController@index')-> name('dashboard.admin')-> m
 Route::group(['prefix'=>'/home/dashboard' ,'middleware'=>['auth','isAdmin']],function(){
 Route::get('/','backend\HomeController@indexdashboard')-> name('admin.dashboard');
 //backend dashboard-author-author request
-Route::get('/authorrequest','backend\AuthorController@requestshow')-> name('dashboard.authorrequest');
+
 Route::get('/authorrequest','frontend\AuthorController@authorrequestlistshow')-> name('dashboard.authorrequest');
 Route::get('/authorrequest/approved/{id}','backend\AuthorController@author_approved')->name('authorrequest.approved');
-
+Route::get('/authorrequest/delete/{id}','backend\AuthorController@authordelete')->name('authorrequest.delete');
 
 //backend dashboard-author-author list
 Route::get('/authorlist','backend\AuthorController@listshow')-> name('dashboard.authorlist');
+
 //backend dashboard-reader-all reader list
 Route::get('/rederlist','backend\ReaderController@readerlistshow')-> name('dashboard.readerlist');
 Route::get('/rederlist','frontend\ReaderController@allreaderlistshow')-> name('dashboard.readerlist');
@@ -40,20 +41,34 @@ Route::get('/rederlist','frontend\ReaderController@allreaderlistshow')-> name('d
 Route::get('/addebook','backend\EbookController@addebookshow')-> name('dashboard.addebook');
 Route::post('/addebook','backend\EbookController@createebook')-> name('dashboard.createbook');
 Route::get('/addebookcat','backend\EbookController@catlist')-> name('dashboard.showcat');
+
 //category
 Route::post('/addebook/cat','backend\EbookController@categoryinsert')-> name('category.insert');
+
 //backend dashboard-reader- subscribed reader list
 Route::get('/subscribed-readerlist','backend\ReaderController@subscribedreaderlistshow')-> name('dashboard.subscribed-readerlist');
+
 //backend dashboard-ebook- all ebook list
 Route::get('/ebook-list','backend\EbookController@ebooklistshow')-> name('dashboard.ebook-list');
+Route::get('/ebook-list/delete/{id}','backend\EbookController@ebookdelete')->name('ebook.delete');
+
+
+
+
 //backend dashboard-ebook- all ebook list inserted
 Route::get('/ebook-list-inserted','backend\EbookController@ebooklistinsertedshow')-> name('dashboard.ebook-list.inserted');
+
 //backend dashboard-ebook- all ebook list author
 Route::get('/ebook-list-author','backend\EbookController@ebooklistauthorshow')-> name('dashboard.ebook-list.author');
+
 //backend dashboard-subscription info
 Route::get('/subscription','backend\SubscriptionController@subscriptionshow')-> name('dashboard.subscription.info');
 Route::post('/subscription/create','backend\SubscriptionController@createsubscription')->name('dashboard.subscription.create');
 Route::get('/subscription','backend\SubscriptionController@allsubscriptionlist')->name('dashboard.subscription.info');
+Route::get('/subscription/delete/{id}','backend\SubscriptionController@subdelete')->name('subscription.delete');
+
+
+
 //backend dashboard admin info
 Route::get('/admininfo','backend\HomeController@adminshow')->name('dashboard.admininfo');
 Route::get('/admininfo','backend\HomeController@adminlist')->name('dashboard.admininfo');
@@ -71,7 +86,9 @@ Route::get('/authorprofile','backend\AuthorController@authorprofileshow')->name(
 //write book
 Route::get('/author-writebook','backend\AuthorController@writebooksshow')->name('dashboard.write-book');
 Route::post('/write-book','backend\AuthorController@writebook')->name('write-book');
-
+Route::get('/author-writebook/allpage','backend\AuthorController@all_written_page_show')->name('dashboard.write-book.allpage');
+Route::get('/author-writebook/allpage/delete/{id}','backend\AuthorController@writepagedelete')->name('page.delete');
+Route::get('/author-writebook/allpage/view/{id}','backend\AuthorController@viewpage')->name('page.view');
 
 
 //publish book
@@ -87,6 +104,10 @@ Route::post('/add-book','backend\AuthorController@addbook')->name('add-book');
 //my library
 Route::get('/authorlibrary','backend\AuthorController@mylibraryshow')->name('dashboard.authorlibrary');
 Route::get('/authorlibrary','backend\AuthorController@mylibrarylist')->name('dashboard.authorlibrary');
+
+Route::get('/authorlibrary/readbook/{id}','frontend\MylibraryController@viewbook')->name('readbook.view');
+Route::get('/authorlibrary/edit/{id}','frontend\MylibraryController@editmylibrary')->name('mybook.edit');
+
 
 });
 
@@ -129,6 +150,14 @@ Route::get('/homef/profile','frontend\ReaderController@profileshow')-> name('rea
 Route::get('/homef/mylibrary','frontend\MylibraryController@readermylibraryshow')-> name('reader.mylibrary') ;
 Route::post('/homef/mylibrary/addbook','frontend\MylibraryController@readeraddbook')->name('readeradd-book');
 
+Route::get('/mylibrary/delete/{id}','frontend\MylibraryController@mylibrarydelete')->name('mylibrary.delete');
+Route::get('/authorlibrary/edit/{id}','frontend\MylibraryController@editreaderlibrary')->name('readermybook.edit');
 
+Route::put('/authorlibrary/update/{id}','frontend\MylibraryController@updatemylibrary')->name('mybook.update');
+
+
+//message
+
+Route::post('/homef/message','frontend\HomeController@messagecreate')->name('message.create');
 
 });

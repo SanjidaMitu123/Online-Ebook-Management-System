@@ -51,7 +51,19 @@ class SubscriptionController extends Controller
     }
 
 
-
+    public function subdelete($id)
+    {
+       
+       $sublist=Subscription::find($id);
+       if(!empty($sublist))
+       {
+           $sublist->delete();
+           $message="data deleted Successfully";
+       }else{
+           $message="No data found.";
+       }
+        return redirect()->back()->with('message',$message);
+    }
 
 
 }

@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('phone_no')->nullable();
             $table->text('image')-> nullable();
             $table->string('role');
+            $table->string('is_approved')->  nullable();
             $table->rememberToken();
             $table->timestamps();
         });

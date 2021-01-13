@@ -15,7 +15,7 @@ class CreateEbooksTable extends Migration
     {
         Schema::create('ebooks', function (Blueprint $table) {
             $table->id();
-           
+            $table->foreignId('user_id');
             $table->string('book_name');
             $table->string('category')-> nullable();
             $table->string('author_name');
@@ -25,6 +25,7 @@ class CreateEbooksTable extends Migration
             $table->string('book_preview');
             $table->string('book');
             $table->string('book_image');
+            $table->string('role');
             $table->timestamps();
         });
     }

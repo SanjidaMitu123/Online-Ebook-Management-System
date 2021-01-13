@@ -15,7 +15,7 @@ class CreateMylibraryTable extends Migration
     {
         Schema::create('mylibrary', function (Blueprint $table) {
             $table->id();
-           
+            $table->foreignId('user_id');
             $table->string('book_name');
             $table->string('category')-> nullable();
             $table->string('author_name')-> nullable();

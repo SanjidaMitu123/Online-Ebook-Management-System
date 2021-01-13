@@ -176,15 +176,15 @@ h6 {
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Address</p>
-                                        <h6 class="text-muted f-w-400">{{$apro -> address}}</h6>
+                                        <h6 class="text-muted f-w-400"></h6>
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Qualification</p>
-                                        <h6 class="text-muted f-w-400">{{$apro -> qualification}}</h6>
+                                        <h6 class="text-muted f-w-400"></h6>
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Number of book you published</p>
-                                        <h6 class="text-muted f-w-400">{{$apro-> no_of_books_published}}</h6>
+                                        <h6 class="text-muted f-w-400"></h6>
                                     </div>
                                 </div>
                                 <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Your Books</h6>

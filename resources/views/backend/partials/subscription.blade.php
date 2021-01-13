@@ -75,7 +75,7 @@
       <td>{{$data->description}}</td>
       <td>
                     <a class="btn btn-warning" href="">Edit</a>
-                    <a class="btn btn-danger" href="">Delete</a>
+                    <a class="btn btn-danger" href="{{route('subscription.delete',$data->id)}}">Delete</a>
       </td>
     </tr>
     @endforeach

@@ -1,7 +1,9 @@
 	<!-- Start Featured Slider -->
 
 	<section id="mu-hero">
+	@guest
 		<div class="container">
+		
 			<div class="row">
 
 				<div class="col-md-6 col-sm-6 col-sm-push-6">
@@ -27,10 +29,13 @@
         @endforeach
         @endif
 					</div>
+					
 				</div>	
-
+				
 			</div>
+			
 		</div>
+		@endguest
 	</section>
 	
 	<!-- Start Featured Slider -->

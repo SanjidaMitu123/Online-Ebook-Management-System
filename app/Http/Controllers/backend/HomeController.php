@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Models\User;
+use App\Models\Models\Ebook;
 use Illuminate\Http\Request;
 
 
@@ -11,12 +12,15 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('backend.home');
+        $fbook=Ebook::all();
+       
+        return view('backend.home',compact('fbook'));
     }
    
     public function indexdashboard()
     {
-        return view('backend.home');
+        $fbook=Ebook::all();
+        return view('backend.home',compact('fbook'));
     }
 
     public function adminshow()
@@ -26,11 +30,16 @@ class HomeController extends Controller
     public function adminlist()
     {
      
-        $alist=User::all();
+        $ulist = User::where('role','=','admin')->get();
        // dd($alist);
        
         
-        return view ('backend.partials.admin',compact('alist'));
+        return view ('backend.partials.admin',compact('ulist'));
     }
+
+
+
+
+    
  
 }

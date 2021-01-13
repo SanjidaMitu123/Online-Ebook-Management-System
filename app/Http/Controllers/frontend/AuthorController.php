@@ -25,8 +25,19 @@ class AuthorController extends Controller
                         $image->storeAs('author_picture',$file_name);
         
                     }
+                    $rbook_name='';
 
-        //query builder
+                    //        step1- check has file
+                                if($request->hasFile('add_book'))
+                                {
+                                    $book=$request->file('add_book');
+                                   //step2- generate unique name
+                                    $rbook_name=date('Ymdhms').'.'.$book->getClientOriginalExtension();
+                                   //step 3- store file with name
+                                    $book->storeAs('authorrequestbook',$rbook_name);
+                    
+                                }
+       
 
         $user = User::create([
              
@@ -49,9 +60,8 @@ class AuthorController extends Controller
             'qualification'=>$request->qualification,
             'no_of_books_published'=>$request->no_of_books_published,
             'about_books'=>$request->about_books,
-            'add_book'=>$request->add_book
-            
-            
+            'add_book'=>$rbook_name
+                
             
         ]);
 

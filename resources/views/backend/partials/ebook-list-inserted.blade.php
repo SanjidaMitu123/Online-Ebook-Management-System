@@ -1,34 +1,51 @@
 @extends ('backend.master')
 @section('main')
 <h1>Ebook List Inserted by Admin</h1>
+@if(session()->has('message'))
+            <p class="alert alert-success">{{session()->get('message')}}</p>
+        @endif
+
+        @if($errors->any())
+            @foreach($errors->all() as $er)
+                <p class="alert alert-danger">{{$er}}</p>
+        @endforeach
+        @endif
 <table class="table">
-  <thead class="thead-dark">
+<thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Book Name</th>
+      <th scope="col">Book Category</th>
+      <th scope="col">Author Name</th>
+      <th scope="col">Published Year</th>
+      <th scope="col">Addition No </th>
+      <th scope="col">About the book</th>
+      <th scope="col">book Preview</th>
+      <th scope="col">Book </th>
+      <th scope="col">Book Image</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
+  @foreach($ielist  as $key=>$data)
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row">{{$key+1}}</th>
+      <td>{{$data->book_name}}</td>
+      <td>{{$data->category}}</td>
+      <td>{{$data->author_name}}</td>
+      <td>{{$data->year}}</td>
+      <td>{{$data->addition}}</td>
+      <td>{{$data->about_book}}</td>
+      <td>{{$data->book_preview}}</td>
+      <td>{{$data->book}}</td>
+      <td>{{$data->book_image}}</td>
+      <td>
+                    <a class="btn btn-warning" href="">Edit</a>
+                    <a class="btn btn-danger" href="">Delete</a>
+      </td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    @endforeach
+
   </tbody>
 </table>
 

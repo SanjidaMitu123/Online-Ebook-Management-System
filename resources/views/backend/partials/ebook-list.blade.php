@@ -1,6 +1,15 @@
 @extends ('backend.master')
 @section('main')
 <h1>Ebook List</h1>
+@if(session()->has('message'))
+            <p class="alert alert-success">{{session()->get('message')}}</p>
+        @endif
+
+        @if($errors->any())
+            @foreach($errors->all() as $er)
+                <p class="alert alert-danger">{{$er}}</p>
+        @endforeach
+        @endif
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -32,7 +41,7 @@
       <td>{{$data->book_image}}</td>
       <td>
                     <a class="btn btn-warning" href="">Edit</a>
-                    <a class="btn btn-danger" href="">Delete</a>
+                    <a class="btn btn-danger" href="{{route('ebook.delete',$data->id)}}">Delete</a>
       </td>
     </tr>
     @endforeach

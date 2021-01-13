@@ -15,7 +15,7 @@ class CreateWriteBookTable extends Migration
     {
         Schema::create('write_book', function (Blueprint $table) {
             $table->id();
-           
+            $table->foreignId('user_id');
             $table->string('topic_name');
             $table->string('page_no');
             $table->text('description');

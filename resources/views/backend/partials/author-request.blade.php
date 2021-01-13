@@ -1,6 +1,16 @@
 @extends ('backend.master')
 @section('main')
 <h1>Author Request List</h1>
+@if(session()->has('message'))
+            <p class="alert alert-success">{{session()->get('message')}}</p>
+        @endif
+
+        @if($errors->any())
+            @foreach($errors->all() as $er)
+                <p class="alert alert-danger">{{$er}}</p>
+        @endforeach
+        @endif
+       
 <table class="table table-hover">
   <thead>
     <tr>
@@ -18,9 +28,9 @@
     </tr>
   </thead>
   <tbody>
-  @foreach($list  as $data)
+  @foreach($list  as $key=>$data)
     <tr>
-      <th scope="row">{{$data->id}}</th>
+      <th scope="row">{{$key+1}}</th>
       <td>{{$data->name}}</td>
       <td>{{optional($data->author)->address}}</td>
       <td>{{optional($data->author)->qualification}}</td>
@@ -32,7 +42,7 @@
       <td>{{$data->image}}</td>
       
       <td>
-                    <a class="btn btn-danger" href="">Delete</a>
+                    <a class="btn btn-danger" href="{{route('authorrequest.delete',$data->id)}}">Delete</a>
                     @if($data->is_approved == null)
                     <a class="btn btn-info" href="{{route('authorrequest.approved',$data->id)}}">not approved</a>
                     @else

@@ -32,7 +32,7 @@
                   @endguest
 				            <li><a href="#mu-pricing">SUBSCRIPTION</a></li>
                     @guest
-                            <li><a href="#mu-testimonials">TESTIMONIALS</a></li>
+                            <li><a href="#mu-testimonials">REVIEWS</a></li>
                             <li><a href="#mu-contact">CONTACT</a></li>
                             @endguest
 						   

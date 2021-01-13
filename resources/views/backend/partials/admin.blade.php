@@ -12,7 +12,7 @@
   </thead>
   <tbody>
 
-  @foreach($alist as $data)
+  @foreach($ulist as $data)
     <tr>
       <th scope="row">{{$data -> id}}</th>
       <td>{{$data -> name}}</td>

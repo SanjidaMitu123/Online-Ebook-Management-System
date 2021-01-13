@@ -18,11 +18,13 @@ class EbookController extends Controller
     }
     public function ebooklistinsertedshow()
     {
-        return view('backend.partials.ebook-list-inserted');
+        $ielist = Ebook::where('role','=','admin')->get();
+        return view('backend.partials.ebook-list-inserted',compact('ielist'));
     }
     public function ebooklistauthorshow()
     {
-        return view('backend.partials.ebook-list-author');
+        $aelist = Ebook::where('role','=','author')->get();
+        return view('backend.partials.ebook-list-author',compact('aelist'));
     }
     public function addebookshow()
     {
@@ -43,7 +45,7 @@ class EbookController extends Controller
             'book'=>'required'
         ]);
 
-        //query builder
+       
         $file_name='';
 
         //        step1- check has file
@@ -56,18 +58,46 @@ class EbookController extends Controller
                         $image->storeAs('book_picture',$file_name);
         
                     }
-        //ORM
+
+                    $appbook_name='';
+
+                    //        step1- check has file
+                                if($request->hasFile('book_preview'))
+                                {
+                                    $book=$request->file('book_preview');
+                                   //step2- generate unique name
+                                   $appbook_name=date('Ymdhms').'.'.$book->getClientOriginalExtension();
+                                   //step 3- store file with name
+                                    $book->storeAs('book_preview',$appbook_name);
+                    
+                                }
+          
+                   $apbook_name='';
+
+                                //        step1- check has file
+                                            if($request->hasFile('book'))
+                                            {
+                                                $book=$request->file('book');
+                                               //step2- generate unique name
+                                               $apbook_name=date('Ymdhms').'.'.$book->getClientOriginalExtension();
+                                               //step 3- store file with name
+                                                $book->storeAs('published_book',$apbook_name);
+                                
+                                            }
+
+      
        Ebook::create([
 
-            
+            'user_id'=>auth()->user()->id,
             'book_name'=>$request->book_name,
             'category'=>$request->category_id,
             'author_name'=>$request->author_name,
             'year'=>$request->year,
             'addition'=>$request->addition,
             'about_book'=>$request->about_book,
-            'book_preview'=>$request->book_preview,
-            'book'=>$request->book,
+            'book_preview'=>$appbook_name,
+            'book'=>$apbook_name,
+            'role'=>auth()->user()->role,
             'book_image'=>$file_name
           
             
@@ -108,6 +138,24 @@ class EbookController extends Controller
          
           return view ('backend.partials.add-books',compact('clist'));
       }
+
+
+
+      public function ebookdelete($id)
+      {
+         
+         $booklist=Ebook::find($id);
+         if(!empty($booklist))
+         {
+             $booklist->delete();
+             $message="data deleted Successfully";
+         }else{
+             $message="No data found.";
+         }
+          return redirect()->back()->with('message',$message);
+      }
+  
+ 
 
 
 
